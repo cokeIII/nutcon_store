@@ -1,0 +1,44 @@
+<Page actionBarHidden="true" loaded="pageLoaded"  xmlns:dd="nativescript-drop-down">
+<!-- <ActionBar title="App Icon Demo" height="250" android.icon="res://icon" android.iconVisibility="always"></ActionBar> -->
+    <DockLayout height="100%">
+        <StackLayout dock="top" class="action-bar">
+            <AbsoluteLayout>
+                <StackLayout orientation="horizontal" class="search-txt">
+                    <Label text="&#xf002;" class="fas "></Label>
+                    <TextField class="txt-f-search" hint="ชื่อสินค้า หรือ รหัสสินค้า" width="70%" returnKeyType="search" returnPress="searchSubmit" text="{{search}}"> </TextField>
+                </StackLayout>
+                <Label text="{{iconSearch ? '&#xf0d8;' : '&#xf0d7;'}}" class="fas search-detail-icon" tap="searchDetail"></Label>
+            </AbsoluteLayout>
+        </StackLayout>
+        <StackLayout dock="top" class="search-detail" id="searchDetail">
+            <StackLayout orientation="horizontal" class="bar-search-d">
+                <Label text="&#xf043;" class="fas icon-color-size"></Label>
+                <TextField class="txt-f-search-d color-search-d" width="35%" hint="สี"></TextField>
+                <Label text="&#xf337;" class="fas icon-color-size"></Label>
+                <TextField class="txt-f-search-d color-search-d" width="35%" hint="ขนาด"></TextField>
+            </StackLayout>
+            <StackLayout orientation="horizontal" class="bar-search-d">
+                <AbsoluteLayout>
+                    <dd:DropDown items="{{ itemsCat }}" selectedIndex="{{ selectedIndexCat }}" 
+                                opened="dropDownOpened" closed="dropDownClosed" 
+                                selectedIndexChanged="dropDownSelectedIndexChanged"
+                                class="dropdown-cat color-search-d"/>
+                    <Label text="&#xf0d7;" class="fas dropdown-icon-cat"></Label>
+                </AbsoluteLayout>
+            </StackLayout> 
+            <StackLayout orientation="horizontal" class="bar-search-d">
+                <AbsoluteLayout>
+                    <dd:DropDown items="{{ itemsObj }}" selectedIndex="{{ selectedIndexObj }}" 
+                                opened="dropDownOpened" closed="dropDownClosed" 
+                                selectedIndexChanged="dropDownSelectedIndexChanged"
+                                class="dropdown-obj color-search-d"/>
+                    <Label text="&#xf0d7;" class="fas dropdown-icon-obj"></Label>
+                </AbsoluteLayout>
+                <TextField class="txt-f-search-d color-search-d" width="34%" keyboardType="number" hint="จำนวน"></TextField>
+            </StackLayout> 
+        </StackLayout>
+        <StackLayout dock="bottom">
+
+        </StackLayout>
+    </DockLayout>
+</Page>

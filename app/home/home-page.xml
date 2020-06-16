@@ -13,15 +13,15 @@
         <StackLayout dock="top" class="search-detail" id="searchDetail">
             <StackLayout orientation="horizontal" class="bar-search-d">
                 <Label text="&#xf043;" class="fas icon-color-size"></Label>
-                <TextField class="txt-f-search-d color-search-d" width="35%" hint="สี"></TextField>
+                <TextField class="txt-f-search-d color-search-d" width="35%" hint="สี" text="{{ searchColor }}"></TextField>
                 <Label text="&#xf337;" class="fas icon-color-size"></Label>
-                <TextField class="txt-f-search-d color-search-d" width="35%" hint="ขนาด"></TextField>
+                <TextField class="txt-f-search-d color-search-d" width="35%" hint="ขนาด" text="{{ searchSize }}"></TextField>
             </StackLayout>
             <StackLayout orientation="horizontal" class="bar-search-d">
                 <AbsoluteLayout>
                     <dd:DropDown items="{{ itemsCat }}" selectedIndex="{{ selectedIndexCat }}" 
-                                opened="dropDownOpened" closed="dropDownClosed" 
-                                selectedIndexChanged="dropDownSelectedIndexChanged"
+                                opened="dropDownOpenedCat" closed="dropDownClosedCat" 
+                                selectedIndexChanged="dropDownSelectedIndexChangedCat"
                                 class="dropdown-cat color-search-d"/>
                     <Label text="&#xf0d7;" class="fas dropdown-icon-cat"></Label>
                 </AbsoluteLayout>
@@ -29,14 +29,23 @@
             <StackLayout orientation="horizontal" class="bar-search-d">
                 <AbsoluteLayout>
                     <dd:DropDown items="{{ itemsObj }}" selectedIndex="{{ selectedIndexObj }}" 
-                                opened="dropDownOpened" closed="dropDownClosed" 
-                                selectedIndexChanged="dropDownSelectedIndexChanged"
+                                opened="dropDownOpenedObj" closed="dropDownClosedObj" 
+                                selectedIndexChanged="dropDownSelectedIndexChangedObj"
                                 class="dropdown-obj color-search-d"/>
                     <Label text="&#xf0d7;" class="fas dropdown-icon-obj"></Label>
                 </AbsoluteLayout>
-                <TextField class="txt-f-search-d color-search-d" width="34%" keyboardType="number" hint="จำนวน"></TextField>
+                <TextField id="numberSearch" class="txt-f-search-d color-search-d" width="34%" keyboardType="number" hint="จำนวน" text="{{ searchNumber }}"></TextField>
+            </StackLayout> 
+            <StackLayout orientation="horizontal" class="bar-search-d">
+                <Button text="รีเซ็ต" class="reset-btn" tap="resetBtn"></Button>
+                <Button text="&#xf002; ค้นหา" class="fas search-btn"></Button>
             </StackLayout> 
         </StackLayout>
+
+        <StackLayout>
+
+        </StackLayout>
+
         <StackLayout dock="bottom">
 
         </StackLayout>

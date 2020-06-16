@@ -111,3 +111,8 @@
     margin: 10% 0% 0% 0%;
     height: 100%;
 }
+.main-btn-active {
+    background: rgb(74, 145, 212);
+    border-bottom-width: 10px;
+    border-color: white;
+}

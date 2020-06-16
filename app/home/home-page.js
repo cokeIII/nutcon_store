@@ -14,11 +14,15 @@ var SelectedIndexChangedEventData = require("nativescript-drop-down")
 })
 let searchDetail = null
 let numberSearch = null
+let btnInOut = null
+let oldArgs = null
 exports.pageLoaded = function(args){
     page = args.object
     page.bindingContext = pageData
     searchDetail = page.getViewById('searchDetail')
     numberSearch = page.getViewById('numberSearch')
+    btnInOut = page.getViewById('btnInOut')
+    oldArgs = btnInOut
 }
 exports.searchDetail = function(){
     if(searchDetail.style.visibility == "collapse"){
@@ -49,4 +53,23 @@ exports.resetBtn = function() {
     pageData.searchNumber = "";
     numberSearch.style.visibility = "collapse"
     pageData.search = "";
+}
+
+function btnActive(argsObj){
+    if(oldArgs)
+         oldArgs.className = "bg-main-btn"
+    oldArgs = argsObj
+    argsObj.className = "bg-main-btn main-btn-active"
+}
+exports.inOut = function(args) {
+    btnActive(args.object)
+}
+exports.listOut = function(args) {
+    btnActive(args.object)
+}
+exports.report = function(args) {
+    btnActive(args.object)
+}
+exports.setting = function(args) {
+    btnActive(args.object)
 }

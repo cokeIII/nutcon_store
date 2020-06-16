@@ -49,20 +49,20 @@
                 </StackLayout>
             </AbsoluteLayout>
             <StackLayout orientation="horizontal" class="main-menu">
-                <StackLayout class="bg-main-btn">
+                <StackLayout class="bg-main-btn main-btn-active" tap="inOut" id="btnInOut">
                     <Label text="&#xf474;" class="fas main-btn-icon "></Label>
                     <Label text="สินค้าเข้า/ออก" class="main-menu-txt"></Label>
                 </StackLayout>
-                <StackLayout class="bg-main-btn main-line-btn">
+                <StackLayout class="bg-main-btn main-line-btn" tap="listOut">
                     <Label text="&#xf46d;" class="fas main-btn-icon "></Label>
                     <Label text="รายการออก" class="main-menu-txt"></Label>
                 </StackLayout>
-                <StackLayout class="bg-main-btn main-line-btn">
+                <StackLayout class="bg-main-btn main-line-btn" tap="report">
                     <Label text="&#xf681;" class="fas main-btn-icon "></Label>
                     <Label text="รายงาน" class="main-menu-txt"></Label>
                 </StackLayout>
-                <StackLayout class="bg-main-btn">
-                    <Label text="&#xf085;" class="fas main-btn-icon "></Label>
+                <StackLayout class="bg-main-btn" tap="setting">
+                    <Label text="&#xf085;" class="fas main-btn-icon" ></Label>
                     <Label text="อื่นๆ" class="main-menu-txt"></Label>
                 </StackLayout>
             </StackLayout>

@@ -10,44 +10,62 @@
                 <Label text="{{iconSearch ? '&#xf0d8;' : '&#xf0d7;'}}" class="fas search-detail-icon" tap="searchDetail"></Label>
             </AbsoluteLayout>
         </StackLayout>
-        <StackLayout dock="top" class="search-detail" id="searchDetail">
-            <StackLayout orientation="horizontal" class="bar-search-d">
-                <Label text="&#xf043;" class="fas icon-color-size"></Label>
-                <TextField class="txt-f-search-d color-search-d" width="35%" hint="สี" text="{{ searchColor }}"></TextField>
-                <Label text="&#xf337;" class="fas icon-color-size"></Label>
-                <TextField class="txt-f-search-d color-search-d" width="35%" hint="ขนาด" text="{{ searchSize }}"></TextField>
-            </StackLayout>
-            <StackLayout orientation="horizontal" class="bar-search-d">
-                <AbsoluteLayout>
-                    <dd:DropDown items="{{ itemsCat }}" selectedIndex="{{ selectedIndexCat }}" 
-                                opened="dropDownOpenedCat" closed="dropDownClosedCat" 
-                                selectedIndexChanged="dropDownSelectedIndexChangedCat"
-                                class="dropdown-cat color-search-d"/>
-                    <Label text="&#xf0d7;" class="fas dropdown-icon-cat"></Label>
-                </AbsoluteLayout>
-            </StackLayout> 
-            <StackLayout orientation="horizontal" class="bar-search-d">
-                <AbsoluteLayout>
-                    <dd:DropDown items="{{ itemsObj }}" selectedIndex="{{ selectedIndexObj }}" 
-                                opened="dropDownOpenedObj" closed="dropDownClosedObj" 
-                                selectedIndexChanged="dropDownSelectedIndexChangedObj"
-                                class="dropdown-obj color-search-d"/>
-                    <Label text="&#xf0d7;" class="fas dropdown-icon-obj"></Label>
-                </AbsoluteLayout>
-                <TextField id="numberSearch" class="txt-f-search-d color-search-d" width="34%" keyboardType="number" hint="จำนวน" text="{{ searchNumber }}"></TextField>
-            </StackLayout> 
-            <StackLayout orientation="horizontal" class="bar-search-d">
-                <Button text="รีเซ็ต" class="reset-btn" tap="resetBtn"></Button>
-                <Button text="&#xf002; ค้นหา" class="fas search-btn"></Button>
-            </StackLayout> 
-        </StackLayout>
-
         <StackLayout>
+            <AbsoluteLayout>
+                <StackLayout class="main-data">
 
-        </StackLayout>
+                </StackLayout>
 
-        <StackLayout dock="bottom">
-
+                <StackLayout dock="top" class="search-detail" id="searchDetail">
+                    <StackLayout orientation="horizontal" class="bar-search-d">
+                        <Label text="&#xf53f;" class="fas icon-color-size"></Label>
+                        <TextField class="txt-f-search-d color-search-d" width="35%" hint="สี" text="{{ searchColor }}"></TextField>
+                        <Label text="&#xf337;" class="fas icon-color-size"></Label>
+                        <TextField class="txt-f-search-d color-search-d" width="35%" hint="ขนาด" text="{{ searchSize }}"></TextField>
+                    </StackLayout>
+                    <StackLayout orientation="horizontal" class="bar-search-d">
+                        <AbsoluteLayout>
+                            <dd:DropDown items="{{ itemsCat }}" selectedIndex="{{ selectedIndexCat }}" 
+                                        opened="dropDownOpenedCat" closed="dropDownClosedCat" 
+                                        selectedIndexChanged="dropDownSelectedIndexChangedCat"
+                                        class="dropdown-cat color-search-d"/>
+                            <Label text="&#xf0d7;" class="fas dropdown-icon-cat"></Label>
+                        </AbsoluteLayout>
+                    </StackLayout> 
+                    <StackLayout orientation="horizontal" class="bar-search-d">
+                        <AbsoluteLayout>
+                            <dd:DropDown items="{{ itemsObj }}" selectedIndex="{{ selectedIndexObj }}" 
+                                        opened="dropDownOpenedObj" closed="dropDownClosedObj" 
+                                        selectedIndexChanged="dropDownSelectedIndexChangedObj"
+                                        class="dropdown-obj color-search-d"/>
+                            <Label text="&#xf0d7;" class="fas dropdown-icon-obj"></Label>
+                        </AbsoluteLayout>
+                        <TextField id="numberSearch" class="txt-f-search-d color-search-d" width="34%" keyboardType="number" hint="จำนวน" text="{{ searchNumber }}"></TextField>
+                    </StackLayout> 
+                    <StackLayout orientation="horizontal" class="bar-search-d">
+                        <Button text="รีเซ็ต" class="fas reset-btn" tap="resetBtn"></Button>
+                        <Button text="&#xf002; ค้นหา" class="fas search-btn"></Button>
+                    </StackLayout> 
+                </StackLayout>
+            </AbsoluteLayout>
+            <StackLayout orientation="horizontal" class="main-menu">
+                <StackLayout class="bg-main-btn">
+                    <Label text="&#xf474;" class="fas main-btn-icon "></Label>
+                    <Label text="สินค้าเข้า/ออก" class="main-menu-txt"></Label>
+                </StackLayout>
+                <StackLayout class="bg-main-btn main-line-btn">
+                    <Label text="&#xf46d;" class="fas main-btn-icon "></Label>
+                    <Label text="รายการออก" class="main-menu-txt"></Label>
+                </StackLayout>
+                <StackLayout class="bg-main-btn main-line-btn">
+                    <Label text="&#xf681;" class="fas main-btn-icon "></Label>
+                    <Label text="รายงาน" class="main-menu-txt"></Label>
+                </StackLayout>
+                <StackLayout class="bg-main-btn">
+                    <Label text="&#xf085;" class="fas main-btn-icon "></Label>
+                    <Label text="อื่นๆ" class="main-menu-txt"></Label>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </DockLayout>
 </Page>

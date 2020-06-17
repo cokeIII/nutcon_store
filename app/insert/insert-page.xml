@@ -1,0 +1,28 @@
+<Page actionBarHidden="true" loaded="pageLoaded">
+    <StackLayout class="bg-insert">
+        <StackLayout class="bg-save-icon">
+            <Label text="&#xf083; บันทึก" class="fas save-icon"></Label>
+        </StackLayout>
+        <StackLayout class="bg-camera-icon">
+            <Label text="&#xf083;" class="fas camera-icon"></Label>
+        </StackLayout>
+        <StackLayout class="bg-txt-name">
+            <TextField class="txt-name" hint="ชื่อสินค้า"> </TextField>
+        </StackLayout>
+        <StackLayout class="bg-txt-code">
+            <TextField class="txt-code" hint="รหัสสินค้า"> </TextField>
+        </StackLayout>
+        <StackLayout class="bg-txt-cat" orientation="horizontal">
+            <Label class="txt-cat" text="หมวดหมู่"> </Label><Label class="fas txt-cat-icon" text="&#xf0d7;"> </Label>
+        </StackLayout>
+        <StackLayout class="bg-txt-dis">
+            <TextField class="txt-dis" hint="รายละเอียด"> </TextField>
+        </StackLayout>
+        <ScrollView orientation="vertical" id="scrollView">
+            <StackLayout id="Content">
+                <StackLayout class="bg-insert-obj">
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</Page>

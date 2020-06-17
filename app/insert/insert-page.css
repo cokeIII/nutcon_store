@@ -1,0 +1,104 @@
+.camera-icon{
+    font-size: 48px;
+    margin-top: 25%;
+}
+.bg-insert{
+    width: 100%;
+    height: 100%;
+}
+.bg-camera-icon{
+    text-align: center;
+    margin: 1% 0% 0% 0%;
+    border-bottom-width: 2px;
+    border-color: rgb(218, 214, 214);
+    width: 100%;
+    height: 20%;
+}
+.bg-txt-name{
+    text-align: center;
+    border-bottom-width: 2px;
+    border-color: rgb(218, 214, 214);
+    height: 8%;
+}
+.bg-txt-code{
+    text-align: center;
+    border-bottom-width: 2px;
+    border-color: rgb(218, 214, 214);
+    height: 8%;
+}
+.txt-name{
+    width: 90%;
+    height: 80%;
+    border-width: 2px;
+    border-color: rgb(173, 169, 169);
+    border-radius: 5px;
+}
+.txt-code{
+    width: 90%;
+    height: 80%;
+    border-width: 2px;
+    border-color: rgb(173, 169, 169);
+    border-radius: 5px;
+}
+.bg-txt-cat{
+    text-align: center;
+    border-bottom-width: 2px;
+    border-color: rgb(218, 214, 214);
+    height: 6%;
+}
+.txt-cat{
+    width: 80%;
+    height: 100%;
+    margin-top: 2%;
+}
+.txt-cat-icon{
+    font-size: 32px;
+    text-align: center;
+    background-color: rgb(137, 150, 223);
+    width: 20%;
+    color: white;
+}
+.bg-txt-dis{
+    text-align: center;
+    border-bottom-width: 2px;
+    border-color: rgb(218, 214, 214);
+    height: 8%;
+}
+.txt-dis{
+    width: 90%;
+    height: 80%;
+    border-width: 2px;
+    border-color: rgb(173, 169, 169);
+    border-radius: 5px;
+}
+
+.bg-insert-obj{
+    width: 80%;
+    height:350px;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(175, 172, 172);
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.add-item{
+    width: 100%;
+    height: 100px;
+    background-color: rgb(212, 182, 212);
+}
+.bg-save-icon{
+    text-align: center;
+    border-bottom-width: 2px;
+    border-color: rgb(218, 214, 214);
+    height: 8%;
+    font-size: 16px;
+}
+.save-icon{
+    width: 25%;
+    height: 90%;
+    margin-top: 5%;
+    background-color: rgb(107, 224, 146);
+    border-radius: 10px;
+    margin-top: 5%;
+    margin-left: 72%;
+}

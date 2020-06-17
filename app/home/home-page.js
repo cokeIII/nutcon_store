@@ -1,6 +1,7 @@
 var Observable = require("data/observable")
-var SelectedIndexChangedEventData = require("nativescript-drop-down")
+const Frame = require("tns-core-modules/ui/frame").Frame;
 
+const topmostFrame = Frame.topmost();
  var pageData = new Observable.fromObject({
     search:"",
     searchColor:"",
@@ -11,17 +12,20 @@ var SelectedIndexChangedEventData = require("nativescript-drop-down")
     selectedIndexCat:0,
     itemsObj:["สินค้าทั้งหมด","เหลือมากกว่าหรือเท่ากับ","เหลือน้อยกว่าหรือเท่ากับ"],
     selectedIndexObj:0,
+    listData:[{catName:"test1",price:"150"},{catName:"test2",price:"150"},{catName:"test3",price:"150"},{catName:"test4",price:"150"}]
 })
 let searchDetail = null
 let numberSearch = null
 let btnInOut = null
 let oldArgs = null
+let frame = null
 exports.pageLoaded = function(args){
     page = args.object
     page.bindingContext = pageData
     searchDetail = page.getViewById('searchDetail')
     numberSearch = page.getViewById('numberSearch')
     btnInOut = page.getViewById('btnInOut')
+    frame = page.getViewById('mainFrame')
     oldArgs = btnInOut
 }
 exports.searchDetail = function(){
@@ -63,6 +67,11 @@ function btnActive(argsObj){
 }
 exports.inOut = function(args) {
     btnActive(args.object)
+    const navigationEntry = {
+        moduleName: "show/show",
+    };
+    frame.navigate(navigationEntry);
+
 }
 exports.listOut = function(args) {
     btnActive(args.object)
@@ -72,4 +81,11 @@ exports.report = function(args) {
 }
 exports.setting = function(args) {
     btnActive(args.object)
+}
+
+exports.insertItem = function() {
+    const navigationEntry = {
+        moduleName: "insert/insert-page",
+    };
+    frame.navigate(navigationEntry);
 }

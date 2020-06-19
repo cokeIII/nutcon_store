@@ -1,6 +1,6 @@
 var Observable = require("data/observable")
 const Frame = require("tns-core-modules/ui/frame").Frame;
-
+const application = require("tns-core-modules/application");
 const topmostFrame = Frame.topmost();
  var pageData = new Observable.fromObject({
     search:"",
@@ -12,7 +12,7 @@ const topmostFrame = Frame.topmost();
     selectedIndexCat:0,
     itemsObj:["สินค้าทั้งหมด","เหลือมากกว่าหรือเท่ากับ","เหลือน้อยกว่าหรือเท่ากับ"],
     selectedIndexObj:0,
-    listData:[{catName:"test1",price:"150"},{catName:"test2",price:"150"},{catName:"test3",price:"150"},{catName:"test4",price:"150"}]
+    btnInsert:true,
 })
 let searchDetail = null
 let numberSearch = null
@@ -26,6 +26,7 @@ exports.pageLoaded = function(args){
     numberSearch = page.getViewById('numberSearch')
     btnInOut = page.getViewById('btnInOut')
     frame = page.getViewById('mainFrame')
+    frame.canGoBack(false)
     oldArgs = btnInOut
 }
 exports.searchDetail = function(){
@@ -71,16 +72,20 @@ exports.inOut = function(args) {
         moduleName: "show/show",
     };
     frame.navigate(navigationEntry);
+    pageData.btnInsert = true
 
 }
 exports.listOut = function(args) {
     btnActive(args.object)
+    pageData.btnInsert = false
 }
 exports.report = function(args) {
     btnActive(args.object)
+    pageData.btnInsert = false
 }
 exports.setting = function(args) {
     btnActive(args.object)
+    pageData.btnInsert = false
 }
 
 exports.insertItem = function() {
@@ -88,4 +93,18 @@ exports.insertItem = function() {
         moduleName: "insert/insert-page",
     };
     frame.navigate(navigationEntry);
+    pageData.btnInsert = false
 }
+application.android.on(application.AndroidApplication.activityBackPressedEvent, (args) => {
+    searchDetail.style.visibility = "collapse"
+    pageData.iconSearch = false
+    oldArgs.className = "bg-main-btn"
+    btnInOut.className = "bg-main-btn main-btn-active"
+    const navigationEntry = {
+        moduleName: "show/show",
+        clearHistory: true,
+        // backstackVisible :false,
+    };
+    frame.navigate(navigationEntry);
+    pageData.btnInsert = true
+});

@@ -1,7 +1,7 @@
 <Page actionBarHidden="true" loaded="pageLoaded">
     <StackLayout class="bg-insert">
         <StackLayout class="bg-save-icon">
-            <Label text="&#xf083; บันทึก" class="fas save-icon"></Label>
+            <StackLayout class="fas save-icon"><Label text="&#xf0c7; บันทึก" class="save-txt"></Label></StackLayout>
         </StackLayout>
         <StackLayout class="bg-camera-icon">
             <Label text="&#xf083;" class="fas camera-icon"></Label>
@@ -13,14 +13,29 @@
             <TextField class="txt-code" hint="รหัสสินค้า"> </TextField>
         </StackLayout>
         <StackLayout class="bg-txt-cat" orientation="horizontal">
-            <Label class="txt-cat" text="หมวดหมู่"> </Label><Label class="fas txt-cat-icon" text="&#xf0d7;"> </Label>
+            <Label class="txt-cat" text="หมวดหมู่"></Label><Label class="fas txt-cat-icon" text="&#xf0d7;"> </Label>
         </StackLayout>
         <StackLayout class="bg-txt-dis">
             <TextField class="txt-dis" hint="รายละเอียด"> </TextField>
         </StackLayout>
         <ScrollView orientation="vertical" id="scrollView">
-            <StackLayout id="Content">
-                <StackLayout class="bg-insert-obj">
+            <StackLayout id="Content" id="bgInsert">
+                <StackLayout class="bg-insert-obj" id="dlgInsert">
+                    <StackLayout orientation="horizontal" class="bar-insert-detail">
+                        <Label text="&#xf53f;" class="fas icon-insert-detail"></Label><TextField class="txt-insert-detail" hint="สี"> </TextField>
+                    </StackLayout>
+                    <StackLayout orientation="horizontal" class="bar-insert-detail">
+                        <Label text="&#xf337;" class="fas icon-insert-detail"></Label><TextField class="txt-insert-detail" hint="ขนาด"> </TextField>
+                    </StackLayout>
+                    <StackLayout orientation="horizontal" class="bar-insert-detail">
+                        <Label text="&#xf53a;" class="fas icon-insert-detail"></Label><TextField class="txt-insert-detail" hint="ราคา"> </TextField>
+                    </StackLayout>
+                    <StackLayout orientation="horizontal" class="bar-insert-detail">
+                        <Label text="&#xf187;" class="fas icon-insert-detail"></Label><TextField class="txt-insert-detail" keyboardType	="number" hint="จำนวน"> </TextField>
+                    </StackLayout>
+                    <StackLayout orientation="horizontal">
+                        <Label text="&#xf0c5;" class="fas copy-icon"></Label><Label text="&#xf067;" class="fas plus-icon" tap="plus"></Label>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

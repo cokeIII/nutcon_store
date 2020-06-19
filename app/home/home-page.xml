@@ -15,7 +15,7 @@
             <AbsoluteLayout>
                 <Frame defaultPage="show/show" width="100%" height="90%" id="mainFrame">
                 </Frame>
-                <StackLayout class="insert">
+                <StackLayout class="insert" visibility="{{ btnInsert ? 'visible':'collapse'}}">
                     <Label text="&#xf067;" class="fas insert-icon" tap="insertItem"></Label>
                 </StackLayout>
                 <StackLayout dock="top" class="search-detail" id="searchDetail">

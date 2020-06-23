@@ -13,6 +13,7 @@
   "repository": "<fill-your-repository-here>",
   "dependencies": {
     "@nativescript/theme": "~2.3.0",
+    "nativescript-camera": "^4.5.0",
     "nativescript-drop-down": "^5.0.5",
     "nativescript-ui-listview": "^8.2.0",
     "tns-core-modules": "~6.5.0"

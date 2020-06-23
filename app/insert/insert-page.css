@@ -58,13 +58,13 @@
     width: 20%;
     color: white;
 }
-.bg-txt-dis{
+.bg-txt-des{
     text-align: center;
     border-bottom-width: 2px;
     border-color: rgb(218, 214, 214);
     height: 8%;
 }
-.txt-dis{
+.txt-des{
     width: 90%;
     height: 80%;
     border-width: 2px;
@@ -124,18 +124,102 @@
 .copy-icon {
     font-size: 24px;
     text-align: center;
-    width: 50%;
+    width:33.33%;
     height: 100%;
     color: rgb(98, 183, 223);
     border-right-width: 2px;
+    border-left-width: 2px;
     border-color: rgb(218, 214, 214);
     margin-top: 20%;
 }
 .plus-icon{
     font-size: 24px;
     text-align: center;
-    width: 50%;
+    width: 33.33%;
     height: 100%;
     color: rgb(241, 79, 57);
     margin-top: 20%;
+}
+.minus-icon{
+    font-size: 24px;
+    text-align: center;
+    width: 33.33%;
+    height: 100%;
+    color: rgb(173, 169, 169);
+    margin-top: 20%;
+}
+.pic-pro {
+    height: 100%;
+    width: 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+/* dlg */
+.lg-dialog {
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.5);
+    visibility: collapse;
+}
+.lg-dialog .dialog {
+    /* background-image: url('~/images/bg.png'); */
+    background-position: center;
+    background-size: cover;
+    border-radius: 4;
+    width: 280;
+    height: 400;
+    margin: 48 auto;
+    background-color: #fff;
+    flex-direction: column;
+}
+.dialog .title{
+    position: center;
+    width: 100%;
+    height: 40;
+    padding:0;
+    margin-bottom: 8;
+    flex-shrink: 0;
+    border-bottom-width: 2px;   
+    border-color: rgb(185, 185, 185);
+}
+
+.title .text {
+    font-size: 20;
+    color: black;
+    margin: 0;
+    padding: 6 8 0 8;
+    flex-grow: 1;
+}
+.close {
+    text-align: center;
+    font-size:18px;
+    color:rgba(116, 114, 114, 0.863);
+    width: 16%;
+    margin-top: 10%;
+}
+
+.content {
+    flex-grow: 1;
+}
+.actions {
+    flex-shrink: 0;
+    color: rgb(78, 71, 71);
+    margin: 0 0;
+    height: 50;
+}
+
+.header{
+
+    
+}
+
+.actions .action {
+    flex-grow: 1;
+}
+/* dlg */
+
+.cat-name{
+    font-size: 16px;
 }

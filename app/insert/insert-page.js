@@ -4,7 +4,8 @@ const TextField = require("tns-core-modules/ui/text-field").TextField
 var imageModule = require("tns-core-modules/ui/image");
 var camera = require("nativescript-camera");
 var Observable = require("data/observable")
-
+var Toast = require("nativescript-toast");
+var bghttp = require("nativescript-background-http");
 var pageData = new Observable.fromObject({
     dataInsert:[],
     camera: false,
@@ -12,13 +13,14 @@ var pageData = new Observable.fromObject({
     // id:"",
     cat:"",
     des:"",
-    categoryList:[{catId:0,catName:"ไม่มีหมวดหมู่"},{catId:1,catName:"test1"},{catId:2,catName:"test2"},],
+    categoryList:[],
 })
 
 let bgInsert = null
 let indexInsert = 0
 let picPro = null
 let category = null
+let API_URL = "http://192.168.10.107:7777"
 
 exports.pageLoaded = function(args) {
     camera.requestPermissions()
@@ -280,7 +282,17 @@ exports.takeCamera = function() {
 }
 
 exports.categoryList = function() {
-    category.style.visibility = "visible"
+    fetch("http://192.168.10.107:7777/getCat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({})
+    }).then((r) => r.json())
+    .then((response) => {
+        const result = response.json
+        console.log(result)
+    }).catch((e) => {
+        console.log(e)
+    });
 }
 exports.noop = function() {
 
@@ -290,12 +302,16 @@ exports.hideDialog = function() {
 }
 
 exports.categoryTap = function(args) {
-    pageData.cat = pageData.categoryList[args.index].catName
-    category.style.visibility = "collapse"
+    if(pageData.categoryList.length != 0){
+        pageData.cat = pageData.categoryList[args.index].catName
+        category.style.visibility = "collapse"
+    }
 }
+
 exports.saveData = function() {
     let data = {}
     let proDetail = []
+    var toast = null
     data.name = pageData.name
     // data.id = pageData.id
     data.cat = pageData.cat
@@ -317,4 +333,22 @@ exports.saveData = function() {
     }
     data.proDetail = proDetail
     console.log(data)
+
+    fetch(API_URL+"/insertPro", {
+    method: "POST",
+    headers: { "Content-Type": "application/json",'Accept': 'application/json',},
+    body: JSON.stringify(data)
+    }).then((r) => r.json())
+    .then((response) => {
+        if(response.status == "Success insertPro"){
+            toast = Toast.makeText("insert success","long")
+            toast.show()
+        }
+        else if(response.status == "Fail insertPro"){
+            toast = Toast.makeText("insert fail")
+            toast.show()
+        }
+    }).catch((e) => {
+        console.log('***fetch error***')
+    });
 }

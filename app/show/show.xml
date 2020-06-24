@@ -11,7 +11,7 @@
                             <StackLayout>
                                 <Label text="{{ catName }}"></Label>
                                 <Label text="NameProduct" class="txt-name-pro"></Label>
-                                <Image   stretch="none" width="100%" height="100%" class="img-pro"></Image >
+                                <Image stretch="none" width="100%" height="100%" class="img-pro"></Image >
                             </StackLayout>
                         </GridLayout>
                     </lv:RadListView.itemTemplate>

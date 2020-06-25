@@ -1,21 +1,24 @@
 const labelModule = require("tns-core-modules/ui/label")
 const StackLayout = require("tns-core-modules/ui/layouts/stack-layout").StackLayout
 const TextField = require("tns-core-modules/ui/text-field").TextField
-var imageModule = require("tns-core-modules/ui/image");
-var camera = require("nativescript-camera");
+var imageModule = require("tns-core-modules/ui/image")
+var camera = require("nativescript-camera")
 var Observable = require("data/observable")
-var Toast = require("nativescript-toast");
-var bghttp = require("nativescript-background-http");
+var Toast = require("nativescript-toast")
+var bghttp = require("nativescript-background-http")
+
 var pageData = new Observable.fromObject({
     dataInsert:[],
     camera: false,
     name:"",
     // id:"",
     cat:"",
+    catId:"",
     des:"",
+    pic:"",
     categoryList:[],
 })
-
+var namePic = ""
 let bgInsert = null
 let indexInsert = 0
 let picPro = null
@@ -275,6 +278,7 @@ exports.takeCamera = function() {
         image.src = imageAsset
         pageData.camera = true
         picPro.backgroundImage = image.src._android
+        pageData.pic = image.src._android
 
     }).catch(function (err) {
         console.log("Error -> " + err.message)
@@ -282,14 +286,15 @@ exports.takeCamera = function() {
 }
 
 exports.categoryList = function() {
-    fetch("http://192.168.10.107:7777/getCat", {
+    fetch(API_URL+"/getCat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({})
     }).then((r) => r.json())
     .then((response) => {
-        const result = response.json
-        console.log(result)
+        const result = response.catList
+        pageData.categoryList = result
+        category.style.visibility = "visible"
     }).catch((e) => {
         console.log(e)
     });
@@ -303,19 +308,76 @@ exports.hideDialog = function() {
 
 exports.categoryTap = function(args) {
     if(pageData.categoryList.length != 0){
-        pageData.cat = pageData.categoryList[args.index].catName
+        pageData.cat = pageData.categoryList[args.index].cat_name
+        pageData.catId = pageData.categoryList[args.index].cat_id
         category.style.visibility = "collapse"
     }
 }
 
 exports.saveData = function() {
+
+    // file path and url
+    var m = new Date();
+    var dateString =
+    m.getUTCFullYear() + 
+    ("0" + (m.getUTCMonth()+1)).slice(-2) +
+    ("0" + m.getUTCDate()).slice(-2) +
+    ("0" + m.getUTCHours()).slice(-2) + 
+    ("0" + m.getUTCMinutes()).slice(-2) +
+    ("0" + m.getUTCSeconds()).slice(-2);
+
+    var file =  pageData.pic;
+    var url = API_URL+"/uploadPic";
+    namePic = dateString;
+    
+    // upload configuration
+    var session = bghttp.session("image-upload");
+    var request = {
+            url: url,
+            method: "POST",
+            headers: {
+                "Content-Type": "application/octet-stream",
+            },
+            description: "Uploading " + namePic
+        };
+    let params = [
+        { name: "upload", value: true },
+        { name: "picName", value: namePic },
+        { "name": 'photo', "filename": file, "mimeType": "image/jpg" }
+    ];
+    if(file){
+        let task = session.multipartUpload(params, request);
+        task.on("progress", progressHandler);
+        task.on("error", errorHandler);
+        task.on("responded", respondedHandler);
+        task.on("complete", completeHandler);
+    }
+}
+
+function progressHandler(e) {
+    console.log("uploaded " + e.currentBytes + " / " + e.totalBytes);
+}
+ 
+function errorHandler(e) {
+    console.log("received " + e.responseCode + " code.");
+    var serverResponse = e.response;
+}
+ 
+function respondedHandler(e) {
     let data = {}
     let proDetail = []
     var toast = null
+    if(pageData.name =="" && pageData.catId ==""){
+        toast = Toast.makeText("กรุณาใส่ชื่อ และ หมวดหมู่","long")
+        toast.show()
+        return false
+    }
     data.name = pageData.name
     // data.id = pageData.id
-    data.cat = pageData.cat
+    data.cat = pageData.catId
+    data.catName = pageData.cat
     data.des = pageData.des
+    data.namePic = namePic
 
     for (let index = 0; index <= indexInsert; index++) {
         
@@ -333,18 +395,36 @@ exports.saveData = function() {
     }
     data.proDetail = proDetail
     console.log(data)
+    console.log("received " + e.responseCode + " code. Server sent: " + e.data)
 
-    fetch(API_URL+"/insertPro", {
-    method: "POST",
-    headers: { "Content-Type": "application/json",'Accept': 'application/json',},
-    body: JSON.stringify(data)
+    fetch(API_URL+"/insertCat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json",'Accept': 'application/json',},
+        body: JSON.stringify(data)
     }).then((r) => r.json())
     .then((response) => {
-        if(response.status == "Success insertPro"){
-            toast = Toast.makeText("insert success","long")
-            toast.show()
+        if(response.status){
+
+            fetch(API_URL+"/insertPro", {
+                method: "POST",
+                headers: { "Content-Type": "application/json",'Accept': 'application/json',},
+                body: JSON.stringify(data)
+            }).then((r) => r.json())
+            .then((response) => {
+                if(response.status == "Success insertPro"){
+                    toast = Toast.makeText("insert success","long")
+                    toast.show()
+                }
+                else if(response.status == "Fail insertPro"){
+                    toast = Toast.makeText("insert fail")
+                    toast.show()
+                }
+            }).catch((e) => {
+                console.log('***fetch error***')
+            }); 
+
         }
-        else if(response.status == "Fail insertPro"){
+        else{
             toast = Toast.makeText("insert fail")
             toast.show()
         }
@@ -352,3 +432,8 @@ exports.saveData = function() {
         console.log('***fetch error***')
     });
 }
+ 
+function completeHandler(e) {
+
+}
+ 

@@ -54,7 +54,7 @@
                     <ListView items="{{ categoryList }}" itemTap="categoryTap" class="users-selector">
                         <ListView.itemTemplate  let-country="item" let-i="index" let-odd="odd" let-even="even" class="list-item">
                             <StackLayout class="item" orientation="horizontal">
-                                <Label text="{{ catName }}" class="cat-name"></Label>
+                                <Label text="{{ cat_name }}" class="cat-name"></Label>
                             </StackLayout>
                         </ListView.itemTemplate>
                     </ListView>

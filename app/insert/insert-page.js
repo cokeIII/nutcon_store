@@ -313,7 +313,75 @@ exports.categoryTap = function(args) {
         category.style.visibility = "collapse"
     }
 }
+function sendInsert() {
+    let data = {}
+    let proDetail = []
+    var toast = null
+    if(pageData.name =="" && pageData.catId ==""){
+        toast = Toast.makeText("กรุณาใส่ชื่อ และ หมวดหมู่","long")
+        toast.show()
+        return false
+    }
+    data.name = pageData.name
+    // data.id = pageData.id
+    data.cat = pageData.catId
+    data.catName = pageData.cat
+    data.des = pageData.des
+    data.namePic = namePic
 
+    for (let index = 0; index <= indexInsert; index++) {
+        
+        let txtColor = page.getViewById("txtColor-"+index)
+        let txtSize = page.getViewById("txtSize-"+index)
+        let txtPrice = page.getViewById("txtPrice-"+index)
+        let txtNum = page.getViewById("txtNum-"+index)
+
+         proDetail.push({   
+            txtColor: txtColor.text,
+            txtSize: txtSize.text,
+            txtPrice: txtPrice.text,
+            txtNum: txtNum.text,
+         })
+    }
+    data.proDetail = proDetail
+    console.log(data)
+
+    fetch(API_URL+"/insertCat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json",'Accept': 'application/json',},
+        body: JSON.stringify(data)
+    }).then((r) => r.json())
+    .then((response) => {
+        console.log(response)
+        if(response.status){
+            data.cat = response.catId                
+            fetch(API_URL+"/insertPro", {
+                method: "POST",
+                headers: { "Content-Type": "application/json",'Accept': 'application/json',},
+                body: JSON.stringify(data)
+            }).then((r) => r.json())
+            .then((response) => {
+                if(response.status == "Success insertPro"){
+                    toast = Toast.makeText("insert success","long")
+                    toast.show()
+                }
+                else if(response.status == "Fail insertPro"){
+                    toast = Toast.makeText("insert fail")
+                    toast.show()
+                }
+            }).catch((e) => {
+                console.log('***fetch error*** InsertPro')
+            }); 
+
+        }
+        else{
+            toast = Toast.makeText("insert fail")
+            toast.show()
+        }
+    }).catch((e) => {
+        console.log('***fetch error*** InsertCat')
+    });
+}
 exports.saveData = function() {
 
     // file path and url
@@ -351,6 +419,10 @@ exports.saveData = function() {
         task.on("error", errorHandler);
         task.on("responded", respondedHandler);
         task.on("complete", completeHandler);
+    } else {
+        console.log("NO IMG")
+        namePic = ""
+        sendInsert()
     }
 }
 
@@ -364,73 +436,8 @@ function errorHandler(e) {
 }
  
 function respondedHandler(e) {
-    let data = {}
-    let proDetail = []
-    var toast = null
-    if(pageData.name =="" && pageData.catId ==""){
-        toast = Toast.makeText("กรุณาใส่ชื่อ และ หมวดหมู่","long")
-        toast.show()
-        return false
-    }
-    data.name = pageData.name
-    // data.id = pageData.id
-    data.cat = pageData.catId
-    data.catName = pageData.cat
-    data.des = pageData.des
-    data.namePic = namePic
-
-    for (let index = 0; index <= indexInsert; index++) {
-        
-        let txtColor = page.getViewById("txtColor-"+index)
-        let txtSize = page.getViewById("txtSize-"+index)
-        let txtPrice = page.getViewById("txtPrice-"+index)
-        let txtNum = page.getViewById("txtNum-"+index)
-
-         proDetail.push({   
-            txtColor: txtColor.text,
-            txtSize: txtSize.text,
-            txtPrice: txtPrice.text,
-            txtNum: txtNum.text,
-         })
-    }
-    data.proDetail = proDetail
-    console.log(data)
     console.log("received " + e.responseCode + " code. Server sent: " + e.data)
-
-    fetch(API_URL+"/insertCat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json",'Accept': 'application/json',},
-        body: JSON.stringify(data)
-    }).then((r) => r.json())
-    .then((response) => {
-        if(response.status){
-
-            fetch(API_URL+"/insertPro", {
-                method: "POST",
-                headers: { "Content-Type": "application/json",'Accept': 'application/json',},
-                body: JSON.stringify(data)
-            }).then((r) => r.json())
-            .then((response) => {
-                if(response.status == "Success insertPro"){
-                    toast = Toast.makeText("insert success","long")
-                    toast.show()
-                }
-                else if(response.status == "Fail insertPro"){
-                    toast = Toast.makeText("insert fail")
-                    toast.show()
-                }
-            }).catch((e) => {
-                console.log('***fetch error***')
-            }); 
-
-        }
-        else{
-            toast = Toast.makeText("insert fail")
-            toast.show()
-        }
-    }).catch((e) => {
-        console.log('***fetch error***')
-    });
+    sendInsert()
 }
  
 function completeHandler(e) {
